@@ -315,7 +315,7 @@ dialog:focus,
   position: relative;
   width: 21px;
   height: 21px;
-  color: var(--accent-color);
+  color: var(--floppy-icon);
   mix-blend-mode: difference;
 }
 
