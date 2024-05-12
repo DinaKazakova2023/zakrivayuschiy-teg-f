@@ -273,8 +273,7 @@ dialog:focus,
 }
 
 .button:focus-visible,
-.button-save_as_a_memory:focus-visible,
-.button_dialog_ok:focus-visible {
+.button-save_as_a_memory:focus-visible {
   box-shadow: 2px 2px 0px 0px var(--accent-color);
 }
 
