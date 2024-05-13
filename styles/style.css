@@ -31,13 +31,14 @@
   margin-block-end: 100px;
   border: 2px solid var(--border-color);
   background-color: var(--bg-color);
-  padding-block-start: 136px;
+  padding-block-start: 136px; /* размер для мобилки указан в медиа */
   max-width: 700px;
   font-family: var(--accent-font);
   color: var(--accent-color);
 }
 
 .header_title {
+  /* line-height: 65px; */
   text-decoration: none;
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
 }
@@ -45,6 +46,7 @@
 .header_subtitle {
   text-transform: uppercase;
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
+  /* line-height: 23px; */
   margin-block-start: 20px;
   margin-block-end: 25px;
 }
@@ -68,7 +70,7 @@
   position: relative;
 }
 
-.theme-menu__button:after {
+.theme-menu__button::after {
   display: block;
   position: absolute;
   content: "";
@@ -76,15 +78,16 @@
   opacity: 0.6;
   top: 17px;
   left: 4px;
-  width: 0;
   height: 2px;
-  transition: width 0.5s ease-in;
+  transition: scale 0.5s ease-in;
+  transform-origin: 0;
+  scale: 0;
 }
 
 .theme-menu__button:focus-visible::after {
+  scale: 1;
   width: 100%;
   outline: none;
-  scale: 1;
 }
 
 .theme-menu__button {
@@ -95,9 +98,11 @@
   cursor: pointer;
   background: transparent;
   transition: opacity 0.3s ease;
+  line-height: 14px;
+  appearance: none;
 }
 
-.theme-menu__button:disabled:before {
+.theme-menu__button:disabled::before {
   content: "▶";
   width: 14px;
   height: 14px;
@@ -118,14 +123,15 @@
 
 .theme-menu__button:disabled {
   opacity: 0.6;
+  pointer-events: none;
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  /* margin-inline: auto; */
+  margin-inline: auto;
   align-items: center;
-  /* max-width: 696px; */
+  max-width: 700px;
   gap: 50px;
 }
 
@@ -135,11 +141,11 @@
   border: 2px solid var(--border-color);
   background-color: var(--bg-color);
   color: var(--accent-color);
-  width: clamp(23.4375rem, 16.3732rem + 30.1408vw, 43.5rem);
 }
 
 .card_title {
   font-size: var(--main-size);
+  line-height: 21px;
   padding: 5px 10px;
   font-variation-settings: "wght" var(--title-weight);
   border-bottom: 2px solid var(--border-color);
@@ -147,7 +153,9 @@
 
 .images {
   width: 100%;
+  height: 100%;
   object-fit: cover;
+  object-position: bottom;
   aspect-ratio: 1 / 1;
   display: block;
 }
@@ -180,9 +188,13 @@
   filter: sepia(50%);
 }
 
+.card_image {
+  position: relative;
+}
+
 .libel {
   position: absolute;
-  top: 58px;
+  top: 25px;
   right: 25px;
   font-family: var(--accent-font);
   font-size: 14px;
@@ -190,6 +202,8 @@
   mix-blend-mode: hard-light;
   text-shadow: 0 0 1px var(--bg-color);
   opacity: 0.5;
+  line-height: 14px;
+  text-transform: uppercase;
 }
 
 @supports (-webkit-text-stroke: 1px var(--bg-color)) or
@@ -197,6 +211,7 @@
   .libel {
     -webkit-text-stroke: 1px var(--bg-color);
     text-stroke: 1px var(--bg-color);
+    text-shadow: none;
   }
 }
 
@@ -205,11 +220,8 @@
   display: flex;
   flex-direction: column;
   gap: 27px;
-  padding-inline: 25px;
-  padding-block-start: 25px;
-  padding-block-end: 25px;
   line-height: 21px;
-  /* padding: 25px; */
+  padding: 25px;
 }
 
 .text {
@@ -237,6 +249,9 @@
   justify-content: center;
   font-family: var(--accent-font);
   cursor: pointer;
+  transition: translate 0.3s ease;
+  appearance: none;
+  overflow: hidden;
 }
 
 .button__text {
@@ -244,36 +259,37 @@
   font-size: 14px;
   color: var(--text-hover);
   mix-blend-mode: difference;
+  line-height: 90%;
 }
 
-.button:before,
-.button-save_as_a_memory:before,
-.button_dialog_ok:before {
+.button::before {
   content: "";
   position: absolute;
   background-color: var(--accent-color);
   top: 0;
   left: 0;
-  width: 0;
-  height: 100%;
-  transition: 0.5s ease-in-out;
-}
-
-.button:hover:before,
-.button-save_as_a_memory:hover:before,
-.button_dialog_ok:hover:before {
   width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(-100%);
 }
 
-.button:focus,
-dialog:focus,
-.button-save_as_a_memory:focus,
-.button_dialog_ok:focus {
+.button:hover::before
+/* .button-save_as_a_memory:hover::before,
+.button_dialog_ok:hover::before */ {
+  transition: transform 0.5s ease-in-out;
+  transform: translateX(0);
+}
+
+.button:focus
+/* dialog:focus */
+/* .button-save_as_a_memory:focus,
+.button_dialog_ok:focus */ {
   outline: none;
 }
 
-.button:focus-visible,
-.button-save_as_a_memory:focus-visible {
+.button:focus-visible
+/* .button-save_as_a_memory:focus-visible */ {
   box-shadow: 2px 2px 0px 0px var(--accent-color);
 }
 
@@ -283,6 +299,7 @@ dialog:focus,
   height: 35px;
   padding: 0;
   margin-inline-end: 5px;
+  appearance: none;
 }
 
 .card__icon-button:focus {
@@ -294,20 +311,12 @@ dialog:focus,
 }
 
 .button-save_as_a_memory {
-  display: flex;
-  position: relative;
   width: 335px;
   height: 55px;
-  justify-content: center;
-  align-items: center;
   gap: 8px;
-  border: 2px solid var(--border-color);
   background: var(--bg-color);
-  font-family: var(--accent-font);
-  font-size: 14px;
   margin-inline: auto;
   margin-block-end: 103px;
-  cursor: pointer;
 }
 
 .floppy-icon {
@@ -320,12 +329,11 @@ dialog:focus,
 
 .dialog {
   position: fixed;
-  width: 353px;
+  max-width: 353px;
   padding: 30px;
   border: 2px solid var(--border-color);
   background: var(--bg-color);
   color: var(--accent-color);
-  overflow: hidden;
   inset: 0;
 }
 
@@ -356,24 +364,24 @@ dialog:focus,
 }
 
 .button_dialog_ok {
-  position: relative;
   width: 293px;
   height: 38px;
   margin-block-start: 30px;
-  font-family: var(--accent-font);
-  font-size: 14px;
-  cursor: pointer;
-  background-color: transparent;
-  border: 2px solid var(--accent-color);
+  text-transform: uppercase;
 }
 
 @media (width <=375px) {
   .header {
-    width: 100vw;
+    padding-block-start: 120px;
+  }
+
+  .libel {
+    right: 13px;
   }
 
   .floppy-icon {
-    width: 29px;
+    width: 28px;
+    height: 28px;
   }
 
   .dialog {

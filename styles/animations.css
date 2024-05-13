@@ -74,10 +74,11 @@
   transition: fill 0.3s 0.05s linear;
 }
 
-.like-icon.is-liked {
+.like-icon.is-liked .heart {
   animation: scale 0.3s ease-in 1;
   animation-delay: 0.1s;
   animation-direction: alternate;
+  transform-origin: center center;
 }
 
 .like-icon.is-liked .main-body {
@@ -102,6 +103,7 @@
 .like-icon.is-liked .sparks {
   fill: var(--red-heart);
   animation: sparks 0.3s 0.3s ease-in alternate;
+  animation-iteration-count: 1;
 }
 
 .like-icon:not(.is-liked) .contour {
