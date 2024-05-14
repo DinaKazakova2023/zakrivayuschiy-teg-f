@@ -31,14 +31,14 @@
   margin-block-end: 100px;
   border: 2px solid var(--border-color);
   background-color: var(--bg-color);
-  padding-block-start: 136px; /* размер для мобилки указан в медиа */
+  padding-block-start: 136px;
   max-width: 700px;
   font-family: var(--accent-font);
   color: var(--accent-color);
 }
 
 .header_title {
-  /* line-height: 65px; */
+  line-height: 65px;
   text-decoration: none;
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
 }
@@ -46,7 +46,7 @@
 .header_subtitle {
   text-transform: uppercase;
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
-  /* line-height: 23px; */
+  line-height: 23px;
   margin-block-start: 20px;
   margin-block-end: 25px;
 }
@@ -76,18 +76,17 @@
   content: "";
   background-color: var(--accent-color);
   opacity: 0.6;
+  width: 100%;
   top: 17px;
   left: 4px;
   height: 2px;
-  transition: scale 0.5s ease-in;
+  transition: scale 0.3s ease;
   transform-origin: 0;
   scale: 0;
 }
 
 .theme-menu__button:focus-visible::after {
   scale: 1;
-  width: 100%;
-  outline: none;
 }
 
 .theme-menu__button {
@@ -155,7 +154,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: bottom;
+  object-position: center;
   aspect-ratio: 1 / 1;
   display: block;
 }
@@ -241,17 +240,20 @@
   display: flex;
   position: relative;
   background-color: transparent;
-  width: 130px;
-  height: 38px;
   padding: 9px 17px;
   border: 2px solid var(--border-color);
   align-items: center;
   justify-content: center;
   font-family: var(--accent-font);
   cursor: pointer;
-  transition: translate 0.3s ease;
+  transition: box-shadow 0.3s ease;
   appearance: none;
   overflow: hidden;
+}
+
+.card__like-button {
+  width: 130px;
+  height: 38px;
 }
 
 .button__text {
@@ -274,22 +276,15 @@
   transform: translateX(-100%);
 }
 
-.button:hover::before
-/* .button-save_as_a_memory:hover::before,
-.button_dialog_ok:hover::before */ {
-  transition: transform 0.5s ease-in-out;
+.button:hover::before {
   transform: translateX(0);
 }
 
-.button:focus
-/* dialog:focus */
-/* .button-save_as_a_memory:focus,
-.button_dialog_ok:focus */ {
+.button:focus {
   outline: none;
 }
 
-.button:focus-visible
-/* .button-save_as_a_memory:focus-visible */ {
+.button:focus-visible {
   box-shadow: 2px 2px 0px 0px var(--accent-color);
 }
 
@@ -373,6 +368,14 @@
 @media (width <=375px) {
   .header {
     padding-block-start: 120px;
+  }
+
+  .header_title {
+    line-height: 49px;
+  }
+
+  .header_subtitle {
+    line-height: 14px;
   }
 
   .libel {
